@@ -33,7 +33,7 @@ public class AuthService {
         userEntity.setEmail(authReq.email());
         userEntity.setName(authReq.name());
         userEntity.setPassword(encoder.encode(authReq.password()));
-        userEntity.setRole("user");
+        userEntity.setRole("USER");
         userRepo.save(userEntity);
         return new String[] {};
     }
@@ -41,11 +41,11 @@ public class AuthService {
     public String login(AuthReq authReq) {
         User user = userRepo.findByName(authReq.name()).or(() -> userRepo.findByEmail(authReq.email()))
                 .orElseThrow(() -> new ResourceNotFoundException("user not found"));
-                System.out.println(user.getPassword());
+        System.out.println(user.getPassword());
         if (!encoder.matches(authReq.password(), user.getPassword())) {
             throw new UnauthorizedException("Invalid credentials");
         }
-        String token = jwtUtil.generateAuthToken(user);
+        String token = jwtUtil.generateAuthenticationToken(user);
 
         return token;
     }
