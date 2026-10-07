@@ -20,7 +20,7 @@ public class JwtUtil {
     private final Key secretKey;
     private final long EXPIRATION = 10 * 1000 * 60;
 
-    public JwtUtil(@Value("${spring.jwt.secret}") String secret) {
+    public JwtUtil(@Value("${jwt.secret}") String secret) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 

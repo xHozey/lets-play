@@ -1,8 +1,10 @@
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/LetsplayApplication.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/controller/AuthController.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/controller/ProductController.java
+/home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/controller/UserController.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/AuthReq.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/AuthRes.java
+/home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/UserResponse.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/exception/BadRequestException.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/exception/ConflictException.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/exception/GlobalExceptionHandler.java
@@ -13,6 +15,8 @@
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/repository/ProductRepo.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/repository/UserRepo.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/security/SecurityConfig.java
+/home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/security/filter/JwtAuthenticationFilter.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/service/AuthService.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/service/ProductService.java
+/home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/service/UserService.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/utils/JwtUtil.java

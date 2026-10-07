@@ -25,7 +25,7 @@ public class User implements UserDetails {
 
     @Override
     public List<SimpleGrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+this.role));
     }
 
     @Override
