@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -17,6 +18,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleNotFound(ResourceNotFoundException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<Map<String, String>> handleMissingRoute(NoResourceFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", "Resource not found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 

@@ -8,7 +8,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.zone01.letsplay.exception.UnauthorizedException;
 import com.zone01.letsplay.model.User;
 import com.zone01.letsplay.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
@@ -39,13 +38,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new UnauthorizedException("Missing or invalid Authorization header");
+            filterChain.doFilter(request, response);
+            return;
         }
 
         String token = authHeader.substring(7);
 
         if (jwtUtil.isTokenExpired(token)) {
-            throw new UnauthorizedException("Token expired");
+            filterChain.doFilter(request, response);
+            return;
         }
 
         User user = jwtUtil.extractUser(token);
