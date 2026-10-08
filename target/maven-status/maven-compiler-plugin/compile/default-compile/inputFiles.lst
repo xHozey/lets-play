@@ -9,6 +9,7 @@
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/ProductRes.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/RegisterReq.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/UserResponse.java
+/home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/UserUpdateReq.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/exception/BadRequestException.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/exception/ConflictException.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/exception/ForbiddenException.java
