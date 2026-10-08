@@ -3,7 +3,6 @@ package com.zone01.letsplay.service;
 import org.springframework.stereotype.Service;
 
 import com.zone01.letsplay.dto.LoginReq;
-import com.zone01.letsplay.dto.LoginRes;
 import com.zone01.letsplay.dto.RegisterReq;
 import com.zone01.letsplay.dto.UserResponse;
 import com.zone01.letsplay.exception.ConflictException;
