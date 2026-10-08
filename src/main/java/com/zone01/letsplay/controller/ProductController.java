@@ -1,6 +1,7 @@
 package com.zone01.letsplay.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public String DeleteProduct(@PathVariable String id) {
-        return productService.DeleteProduct(id);
+    public Map<String, String> DeleteProduct(@PathVariable String id) {
+        productService.DeleteProduct(id);
+        return Map.of("message", "Product deleted succesfully");
     }
 }

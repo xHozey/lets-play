@@ -3,7 +3,9 @@ package com.zone01.letsplay.service;
 import org.springframework.stereotype.Service;
 
 import com.zone01.letsplay.dto.LoginReq;
+import com.zone01.letsplay.dto.LoginRes;
 import com.zone01.letsplay.dto.RegisterReq;
+import com.zone01.letsplay.dto.UserResponse;
 import com.zone01.letsplay.exception.ConflictException;
 import com.zone01.letsplay.exception.ResourceNotFoundException;
 import com.zone01.letsplay.exception.UnauthorizedException;
@@ -22,7 +24,7 @@ public class AuthService {
     private final PasswordEncoder encoder;
     private final JwtUtil jwtUtil;
 
-    public String[] register(RegisterReq authReq) {
+    public UserResponse register(RegisterReq authReq) {
 
         if (userRepo.existsByEmail(authReq.email())) {
             throw new ConflictException("email already exist");
@@ -35,8 +37,8 @@ public class AuthService {
         userEntity.setName(authReq.name());
         userEntity.setPassword(encoder.encode(authReq.password()));
         userEntity.setRole("USER");
-        userRepo.save(userEntity);
-        return new String[] {};
+        User user = userRepo.save(userEntity);
+        return new UserResponse(user.getId(), user.getName(), user.getEmail());
     }
 
     public String login(LoginReq authReq) {

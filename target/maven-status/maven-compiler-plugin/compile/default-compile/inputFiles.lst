@@ -4,6 +4,7 @@
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/controller/UserController.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/AuthRes.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/LoginReq.java
+/home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/LoginRes.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/ProductReq.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/ProductRes.java
 /home/hsalihee/Desktop/lets-play/src/main/java/com/zone01/letsplay/dto/RegisterReq.java

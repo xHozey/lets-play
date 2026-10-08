@@ -34,8 +34,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/products").authenticated()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(
-                        new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-
+                        new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                        .accessDeniedHandler((request, response, exception) -> {
+                            response.setStatus(401);
+                            response.setContentType("application/json");
+                            response.getWriter().write(
+                                    "{\"message\":\"You do not have permission to access this resource\"}");
+                        }))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
