@@ -2,7 +2,8 @@ package com.zone01.letsplay.service;
 
 import org.springframework.stereotype.Service;
 
-import com.zone01.letsplay.dto.AuthReq;
+import com.zone01.letsplay.dto.LoginReq;
+import com.zone01.letsplay.dto.RegisterReq;
 import com.zone01.letsplay.exception.ConflictException;
 import com.zone01.letsplay.exception.ResourceNotFoundException;
 import com.zone01.letsplay.exception.UnauthorizedException;
@@ -21,7 +22,7 @@ public class AuthService {
     private final PasswordEncoder encoder;
     private final JwtUtil jwtUtil;
 
-    public String[] register(AuthReq authReq) {
+    public String[] register(RegisterReq authReq) {
 
         if (userRepo.existsByEmail(authReq.email())) {
             throw new ConflictException("email already exist");
@@ -38,10 +39,9 @@ public class AuthService {
         return new String[] {};
     }
 
-    public String login(AuthReq authReq) {
-        User user = userRepo.findByName(authReq.name()).or(() -> userRepo.findByEmail(authReq.email()))
-                .orElseThrow(() -> new ResourceNotFoundException("user not found"));
-        System.out.println(user.getPassword());
+    public String login(LoginReq authReq) {
+        User user = userRepo.findByEmail(authReq.email())
+                .orElseThrow(() -> new ResourceNotFoundException("email doesn't exists"));
         if (!encoder.matches(authReq.password(), user.getPassword())) {
             throw new UnauthorizedException("Invalid credentials");
         }
