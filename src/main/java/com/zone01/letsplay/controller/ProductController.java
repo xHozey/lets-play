@@ -2,6 +2,7 @@ package com.zone01.letsplay.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +37,10 @@ public class ProductController {
     @PutMapping("/{id}")
     public ProductRes UpdateProduct(@PathVariable String id, @RequestBody @Valid ProductReq productReq) {
         return productService.UpdateProduct(id, productReq);
+    }
+
+    @DeleteMapping("/{id}")
+    public String DeleteProduct(@PathVariable String id) {
+        return productService.DeleteProduct(id);
     }
 }

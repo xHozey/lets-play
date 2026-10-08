@@ -51,4 +51,16 @@ public class ProductService {
 
         return new ProductRes(product.getId(), product.getName(), product.getDescription(), product.getPrice());
     }
+
+    public String DeleteProduct(String id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Product product = productRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product doesn't exists"));
+        if (!user.getRole().equals("ADMIN") && !user.getId().equals(product.getUserId())) {
+            throw new ForbiddenException("Action forbidden");
+        }
+
+        productRepo.delete(product);
+        return "product deleted";
+    }
 }
