@@ -3,7 +3,9 @@ package com.zone01.letsplay.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +31,10 @@ public class ProductController {
     @PostMapping
     public ProductRes CreateProduct(@RequestBody @Valid ProductReq productReq) {
         return productService.CreateProduct(productReq);
+    }
+
+    @PutMapping("/{id}")
+    public ProductRes UpdateProduct(@PathVariable String id, @RequestBody @Valid ProductReq productReq) {
+        return productService.UpdateProduct(id, productReq);
     }
 }

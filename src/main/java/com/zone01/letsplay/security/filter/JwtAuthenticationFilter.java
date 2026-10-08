@@ -10,6 +10,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.zone01.letsplay.model.User;
 import com.zone01.letsplay.utils.JwtUtil;
+
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,22 +44,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
+        try {
 
-        if (jwtUtil.isTokenExpired(token)) {
-            filterChain.doFilter(request, response);
-            return;
+            if (jwtUtil.isTokenExpired(token)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            User user = jwtUtil.extractUser(token);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    user,
+                    null,
+                    user.getAuthorities());
+
+            authentication.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (JwtException | IllegalArgumentException e) {
+            SecurityContextHolder.clearContext();
         }
-
-        User user = jwtUtil.extractUser(token);
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                user,
-                null,
-                user.getAuthorities());
-
-        authentication.setDetails(
-                new WebAuthenticationDetailsSource().buildDetails(request));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 }

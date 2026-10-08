@@ -21,13 +21,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<Map<String, String>> handleMissingRoute(NoResourceFoundException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", "Resource not found");
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleGeneric(Exception ex) {
         Map<String, String> error = new HashMap<>();
@@ -40,31 +33,36 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         BindingResult result = ex.getBindingResult();
         if (result != null) {
-            result.getFieldErrors().forEach(error
-                    -> errors.put(error.getField(), error.getDefaultMessage())
-            );
+            result.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
     @ExceptionHandler(ConflictException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(ConflictException ex) {
+    public ResponseEntity<Map<String, String>> handleConflict(ConflictException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(UnauthorizedException ex) {
+    public ResponseEntity<Map<String, String>> handleUnauthorized(UnauthorizedException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(BadRequestException ex) {
+    public ResponseEntity<Map<String, String>> handleBadReqest(BadRequestException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<Map<String, String>> handleForbidden(ForbiddenException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
 }
