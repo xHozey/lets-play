@@ -1,5 +1,7 @@
 package com.zone01.letsplay.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.zone01.letsplay.dto.LoginReq;
@@ -12,16 +14,19 @@ import com.zone01.letsplay.model.User;
 import com.zone01.letsplay.repository.UserRepo;
 import com.zone01.letsplay.utils.JwtUtil;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class AuthService {
 
     private final UserRepo userRepo;
     private final PasswordEncoder encoder;
     private final JwtUtil jwtUtil;
+
+    @Autowired
+    public AuthService(UserRepo userRepo, PasswordEncoder encoder, JwtUtil jwtUtil) {
+        this.userRepo = userRepo;
+        this.encoder = encoder;
+        this.jwtUtil = jwtUtil;
+    }
 
     public UserResponse register(RegisterReq authReq) {
 

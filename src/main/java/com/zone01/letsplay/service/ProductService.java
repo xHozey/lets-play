@@ -2,6 +2,7 @@ package com.zone01.letsplay.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,14 @@ import com.zone01.letsplay.model.Product;
 import com.zone01.letsplay.model.User;
 import com.zone01.letsplay.repository.ProductRepo;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class ProductService {
     private final ProductRepo productRepo;
+
+    @Autowired
+    public ProductService(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
 
     public List<ProductRes> GetProducts() {
         return productRepo.findAll().stream()

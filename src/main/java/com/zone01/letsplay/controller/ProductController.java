@@ -3,6 +3,7 @@ package com.zone01.letsplay.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,15 @@ import com.zone01.letsplay.dto.ProductRes;
 import com.zone01.letsplay.service.ProductService;
 
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-
 @RestController
 @RequestMapping("/api/v1/products")
-@AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     public List<ProductRes> GetProducts() {
