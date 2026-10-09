@@ -28,6 +28,12 @@ public class UserService {
                 .toList();
     }
 
+    public UserResponse GetUser(String id) {
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User doesn't exist"));
+        return new UserResponse(user.getId(), user.getName(), user.getEmail());
+    }
+
     public UserResponse UpdateUser(String id, UserUpdateReq userUpdateReq) {
         User currUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepo.findById(id)

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,12 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> GetUsers() {
         return userService.GetUsers();
+    }
+
+    @GetMapping("/{id}")
+    @PostAuthorize("returnObject.id == authentication.principal.id or hasRole('ADMIN')")
+    public UserResponse GetUser(@PathVariable String id) {
+        return userService.GetUser(id);
     }
 
     @PutMapping("/{id}")
