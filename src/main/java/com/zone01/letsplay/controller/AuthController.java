@@ -12,6 +12,7 @@ import com.zone01.letsplay.dto.RegisterReq;
 import com.zone01.letsplay.dto.UserResponse;
 import com.zone01.letsplay.service.AuthService;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,11 +27,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @PermitAll
     public UserResponse Register(@RequestBody @Valid RegisterReq req) {
         return authService.register(req);
     }
 
     @PostMapping("/login")
+    @PermitAll
     public LoginRes Login(@RequestBody @Valid LoginReq req) {
         String token = authService.login(req);
         return new LoginRes(token);
