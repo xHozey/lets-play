@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Product {
     @Id
-    @Field("id")
     private String id;
     @Field("name")
     private String name;

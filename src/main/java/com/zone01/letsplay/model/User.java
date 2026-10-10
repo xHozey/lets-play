@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User implements UserDetails {
     @Id
-    @Field("id")
     private String id;
     @Field("name")
     private String name;

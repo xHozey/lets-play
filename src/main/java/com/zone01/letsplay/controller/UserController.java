@@ -43,13 +43,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public UserResponse UpdateUser(@PathVariable String id, @RequestBody @Valid UserUpdateReq userUpdateReq) {
         return userService.UpdateUser(id, userUpdateReq);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public Map<String, String> DeleteUser(@PathVariable String id) {
         userService.DeleteUser(id);
         return Map.of("message", "User deleted successfully");
